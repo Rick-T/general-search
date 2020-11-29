@@ -1,0 +1,63 @@
+name: general-search
+version: 0.1.0.0
+github: "Rick-T/general-search"
+license: MIT
+author: "Patrick Teubner"
+maintainer: "Patrick Teubner"
+copyright: "2020 Patrick Teubner"
+
+extra-source-files:
+  - README.md
+  - ChangeLog.md
+
+description: General interface for creating search algorithms as well as some default implementations. Included are Dijkstra's algorithm, A* and DFS.
+
+dependencies:
+  - base >= 4.7 && < 5
+  - containers >= 0.6 && < 0.7
+  - hashable >= 1.3 && < 1.4
+  - mtl >= 2.2 && < 2.3
+  - psqueues >= 0.2 && < 0.3
+  - unordered-containers >= 0.2 && < 0.3
+
+data-files:
+  - bench/resources/movingai/*/*.map
+  - bench/resources/movingai/*/*.map.scen
+
+library:
+  source-dirs: src/
+  ghc-options:
+    - -Wall
+
+tests:
+  general-search-test:
+    main: Spec.hs
+    source-dirs: test
+    build-tools:
+      - hspec-discover
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - array >= 0.5 && < 0.6
+      - general-search
+      - hspec >= 2.7 && < 2.8
+      - QuickCheck >= 2.13 && < 2.14
+
+benchmarks:
+  general-search-bench:
+    main: Bench.hs
+    source-dirs: bench
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - array >= 0.5 && < 0.6
+      - astar
+      - criterion >= 1.5 && < 1.6
+      - deepseq >= 1.4 && < 1.5
+      - general-search
+      - monad-dijkstra
+      - search-algorithms
